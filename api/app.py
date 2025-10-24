@@ -10,7 +10,6 @@ from data.load_data import load_water_data
 from data.clean_data import clean_zscore
 
 
-# Single source of truth for our data store (mongomock)
 COLL = get_collection()
 
 # Numeric fields we support for filtering and statistics
@@ -23,7 +22,7 @@ def seed_collection_if_empty():
         return  # already has data
 
     cleaned_path = "data/cleaned_output.csv"
-    raw_path = "2021-dec16.csv"  # <-- update this to your actual filename
+    raw_path = "2021-dec16.csv" 
 
     if os.path.exists(cleaned_path):
         df = pd.read_csv(cleaned_path)
@@ -42,7 +41,7 @@ seed_collection_if_empty()
 # App bootstrap
 # ------------------------------------------------------------------------------
 app = Flask(__name__)
-CORS(app)  # allow cross-origin requests (from Streamlit later)
+CORS(app) 
 
 
 # ------------------------------------------------------------------------------
@@ -106,7 +105,7 @@ def _load_df_from_db(query=None, skip=0, limit=None):
 @app.get("/api/health")
 def health():
     """
-    Quick liveness check for your demo.
+    Quick liveness check
     Response: { "status": "ok" }
     """
     return jsonify({"status": "ok"}), 200
@@ -333,5 +332,4 @@ def outliers():
 # Main entrypoint
 # ------------------------------------------------------------------------------
 if __name__ == "__main__":
-    # By default runs at http://127.0.0.1:5000
     app.run(host="127.0.0.1", port=5000, debug=True)
