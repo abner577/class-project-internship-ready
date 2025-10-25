@@ -39,13 +39,12 @@ A Streamlit dashboard then consumes the API and visualizes temperature, salinity
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
-```bash
+
 git clone https://github.com/<your-username>/<your-repo-name>.git
 cd <your-repo-name>
 
 ### 2. Create and Activate a Virtual Environment
 **On macOS/Linux (WSL):**
-```bash
 python -m venv .venv
 source .venv/bin/activate
 
