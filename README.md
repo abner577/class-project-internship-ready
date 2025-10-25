@@ -39,16 +39,16 @@ A Streamlit dashboard then consumes the API and visualizes temperature, salinity
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
-
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
 
 ### 2. Create and Activate a Virtual Environment
 **On macOS/Linux (WSL):**
+
 python -m venv .venv
 source .venv/bin/activate
 
-*On Windows**
+**On Windows**
 python -m venv .venv
 .venv\Scripts\activate
 
@@ -57,48 +57,42 @@ pip install -r requirements.txt
 
 ---
 
-# 🧹 Part 1 — Data Loading & Cleaning
-# Run the data pipeline
+## Running the Application
+
+### 1. Data Loading & Cleaning
+**Run the data pipeline**
 python main.py
 
-# This script will:
-# - Load the CSV files from /data/
-# - Clean the data using z-score filtering (|z| > 3)
-# - Print summary stats to the console
-# - Insert cleaned records into MongoMock
-# - Save a cleaned version to /data/cleaned_output.csv
+**This script will:**
+- Load the CSV files from /data/
+- Clean the data using z-score filtering (|z| > 3)
+- Print summary stats to the console
+- Insert cleaned records into MongoMock
+- Save a cleaned version to /data/cleaned_output.csv
 
-
-# 🌐 Part 2 — Flask REST API
-# Start the API server
+### 2. Flask REST API
+**Start the API Server**
 python -m api.app
+Once running, access the endpoints in your browser
 
-# Once running, access the endpoints in your browser or using curl.
+| Endpoint | Description |
+|------------|-------------|
+| **`/api/health`** | Returns { "status": "ok" } |
+| **`/api/health/`** | Returns records with optional filters |
+| **`/api/stats`** | Returns summary statistics for numeric fields |
+| **`/api/outliers`** | Detects outliers using z-score or IQR |
 
-# 🔹 API Endpoints
-# /api/health        -> Returns { "status": "ok" }
-# /api/observations  -> Returns records with optional filters
-# /api/stats         -> Returns summary statistics for numeric fields
-# /api/outliers      -> Detects outliers using z-score or IQR
-
-# Example Queries
-curl "http://127.0.0.1:5000/api/observations?limit=5"
-curl "http://127.0.0.1:5000/api/stats"
-curl "http://127.0.0.1:5000/api/outliers?field=temperature_c&method=zscore"
-
-
-# 📊 Part 3 — Streamlit Client
-# Run the Streamlit dashboard
+### 3. Streamlit Client
+**Run the Streamlti dashboard:**
 streamlit run client/app.py
+Then open http://localhost:8501 in your browser.
 
-# Then open http://localhost:8501 in your browser.
-
-# Features:
-# - Sidebar filters for temperature, salinity, and ODO ranges
-# - Data table showing filtered results
-# - 3 Plotly charts:
-#     • Temperature over time (Line)
-#     • Salinity distribution (Histogram)
-#     • Temperature vs. Salinity (Scatter)
-# - Statistics Panel: calls /api/stats to show summary metrics
-# - Outliers View: calls /api/outliers and displays flagged records
+**Features:**
+- Sidebar filters for temperature, salinity, and ODO ranges
+- Data table showing filtered results
+- 3 Plotly charts:
+    - Temperature over time (Line)
+    - Salinity distribution (Histogram)
+    - Temperature vs. Salinity (Scatter)
+- Statistics Panel: calls /api/stats to show summary metrics
+- Outliers View: calls /api/outliers and displays flagged records
