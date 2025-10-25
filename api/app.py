@@ -22,7 +22,7 @@ def seed_collection_if_empty():
         return  # already has data
 
     cleaned_path = "data/cleaned_output.csv"
-    raw_path = "2021-dec16.csv" 
+    raw_path = "data/2021-dec16.csv" 
 
     if os.path.exists(cleaned_path):
         df = pd.read_csv(cleaned_path)

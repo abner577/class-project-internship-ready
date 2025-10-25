@@ -3,7 +3,7 @@ from data.clean_data import clean_zscore
 from utils.db_connection import get_collection
 
 def main():
-    csv_path = "2021-dec16.csv"   # update with actual filename
+    csv_path = "data/2021-dec16.csv"  
 
     print("Loading dataset...")
     df = load_water_data(csv_path)
