@@ -46,10 +46,13 @@ cd your-repo-name
 **On macOS/Linux (WSL):**
 
 python -m venv .venv
+
 source .venv/bin/activate
 
-**On Windows**
+**On Windows:**
+
 python -m venv .venv
+
 .venv\Scripts\activate
 
 ### 3. Install Dependencies 
@@ -60,7 +63,8 @@ pip install -r requirements.txt
 ## Running the Application
 
 ### 1. Data Loading & Cleaning
-**Run the data pipeline**
+**Run the data pipeline:**
+
 python main.py
 
 **This script will:**
@@ -71,8 +75,10 @@ python main.py
 - Save a cleaned version to /data/cleaned_output.csv
 
 ### 2. Flask REST API
-**Start the API Server**
+**Start the API Server:**
+
 python -m api.app
+
 Once running, access the endpoints in your browser
 
 | Endpoint | Description |
@@ -83,16 +89,18 @@ Once running, access the endpoints in your browser
 | **`/api/outliers`** | Detects outliers using z-score or IQR |
 
 ### 3. Streamlit Client
-**Run the Streamlti dashboard:**
+**Run the Streamlit dashboard:**
+
 streamlit run client/app.py
+
 Then open http://localhost:8501 in your browser.
 
 **Features:**
 - Sidebar filters for temperature, salinity, and ODO ranges
 - Data table showing filtered results
 - 3 Plotly charts:
-    - Temperature over time (Line)
-    - Salinity distribution (Histogram)
-    - Temperature vs. Salinity (Scatter)
+   - Temperature over time (Line)
+   - Salinity distribution (Histogram)
+   - Temperature vs. Salinity (Scatter)
 - Statistics Panel: calls /api/stats to show summary metrics
 - Outliers View: calls /api/outliers and displays flagged records
